@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  php:
+    build: .
+    container_name: php-5-cake3
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    ports:
+      - 80:80
+    volumes:
+      - .:/var/www/html
+
+  mysql:
+    image: mysql
+    container_name: mysql-cake3
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: dev
+      MYSQL_DATABASE: dev
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: dev
+    ports:
+      - 3768:3306
+    volumes:
+      - mysql_cake3:/var/lib/mysql
+
+volumes:
+  mysql_cake3:
